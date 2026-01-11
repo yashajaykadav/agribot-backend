@@ -20,8 +20,10 @@ app.add_middleware(
 )
 
 # --- CONFIGURATION ---
-API_KEY = "AIzaSyAxziHyQnqMZc-SzHlY_XV0dauS6xVTtPA"
+API_KEY = os.getenv("GOOGLE_API_KEY")
 
+if not API_KEY:
+    raise ValueError("No API Key found! Set GOOGLE_API_KEY in environment variables.")
 genai.configure(api_key=API_KEY)
 model = genai.GenerativeModel('gemini-flash-latest')
 
